@@ -1,0 +1,17 @@
+# Siage's list of requests.
+# https://www.joedog.org/siege-home/
+
+http://localhost/v1/payments/ POST {"from_account":"bob123","amount": 0.05, "to_account": "alice456"}
+http://localhost/v1/payments/ POST {"from_account":"bob123","amount": -5, "to_account": "alice456"}
+http://localhost/v1/payments/ POST {"from_account":"alice456","amount": 0.05, "to_account": "bob123"}
+http://localhost/v1/payments/ POST {"from_account":"alice456","amount": -5, "to_account": "bob123"}
+
+http://localhost/v1/payments/ POST {"from_account":"","amount": 5, "to_account": "bob123"}
+http://localhost/v1/payments/ POST {"from_account":"alice456","amount": 5, "to_account": ""}
+
+http://localhost/v1/payments/ POST {"from_account":"john000","amount": 0.05, "to_account": "bob123"}
+http://localhost/v1/payments/ POST {"from_account":"alice456","amount": 0.05, "to_account": "jane000"}
+
+http://localhost/v1/accounts/
+http://localhost/v1/payments/
+http://localhost/404/

@@ -1,0 +1,33 @@
+---
+version: "3"
+services:
+  lb:
+    image: traefik
+    command: --api --docker
+    ports:
+      - "80:80"
+      - 8080:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    restart: always
+    labels:
+      - "traefik.backend=app"
+      - "traefik.frontend.rule=PathPrefix:/v1"
+
+  db:
+    image: postgres
+    container_name: db
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=secret
+    restart: always
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d/
